@@ -23,9 +23,9 @@ app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
 	if(req.body) {
-		var arr = [fs.readFileSync('./text2.json', 'utf-8')];
-		arr.push(JSON.stringify(req.body, null, 10));
-		var newFile = fs.writeFile("./text2.json", [arr], function() {
+		var arr = [JSON.stringify(req.body, null, 10)];
+		arr.push(fs.readFileSync('./text.json', 'utf-8'));
+		fs.writeFile("./text.json", arr, function() {
 				console.log(arr)
 		});
 		res.end('hi');
