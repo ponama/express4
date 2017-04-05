@@ -23,8 +23,10 @@ app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
 	if(req.body) {
-		fs.writeFile("./text2.txt", JSON.stringify(req.body, null, 10), function() {
-			console.log('body in')
+		var arr = [fs.readFileSync('./text2.json', 'utf-8')];
+		arr.push(JSON.stringify(req.body, null, 10));
+		var newFile = fs.writeFile("./text2.json", [arr], function() {
+				console.log(arr)
 		});
 		res.end('hi');
 	}
